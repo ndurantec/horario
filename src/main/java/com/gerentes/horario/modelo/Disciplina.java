@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Professor implements Serializable{
+public class Disciplina implements Serializable{
 
     private static final long serialVersionUID =1L;
 
@@ -16,17 +16,18 @@ public class Professor implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     String nome;
-    String cpf;
-
+    int cargaHoraria;
+    
     @Deprecated
-    public Professor() {
+    public Disciplina() {
     }
 
-    public Professor(Long id, String nome, String cpf) {
+    public Disciplina(Long id, String nome, int cargaHoraria) {
         this.id = id;
         this.nome = nome;
-        this.cpf = cpf;
+        this.cargaHoraria = cargaHoraria;
     }
+
 
     public static long getSerialversionuid() {
         return serialVersionUID;
@@ -48,17 +49,12 @@ public class Professor implements Serializable{
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public int getCargaHoraria() {
+        return cargaHoraria;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    @Override
-    public String toString() {
-        return "Professor [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
     }
 
     @Override
@@ -67,7 +63,7 @@ public class Professor implements Serializable{
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        result = prime * result + cargaHoraria;
         return result;
     }
 
@@ -79,7 +75,7 @@ public class Professor implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Professor other = (Professor) obj;
+        Disciplina other = (Disciplina) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -90,11 +86,13 @@ public class Professor implements Serializable{
                 return false;
         } else if (!nome.equals(other.nome))
             return false;
-        if (cpf == null) {
-            if (other.cpf != null)
-                return false;
-        } else if (!cpf.equals(other.cpf))
+        if (cargaHoraria != other.cargaHoraria)
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Disciplina [id=" + id + ", nome=" + nome + ", cargaHoraria=" + cargaHoraria + "]";
     }
 }
