@@ -16,7 +16,7 @@ public class GradeDeHorarioController {
         System.out.println("chegou aqui a requisição...");
         return "okok";
     }
-    @PostMapping(value = "/api/professor/")
+    @PostMapping(value = "/api/gradedehorario/")
     public void create(@RequestBody GradeDeHorarioDto GradeDeHorarioDto){
         GradeDeHorario gradeDeHorario = GradeDeHorarioDto.novoGradeDeHorario();
         System.out.println(gradeDeHorario.toString());

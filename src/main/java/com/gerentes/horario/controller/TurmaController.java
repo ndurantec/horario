@@ -16,7 +16,7 @@ public class TurmaController {
         System.out.println("chegou aqui a requisição...");
         return "okok";
     }
-    @PostMapping(value = "/api/professor/")
+    @PostMapping(value = "/api/turma/")
     public void create(@RequestBody TurmaDto TurmaDto){
         Turma turma = TurmaDto.novoTurma();
         System.out.println(turma.toString());

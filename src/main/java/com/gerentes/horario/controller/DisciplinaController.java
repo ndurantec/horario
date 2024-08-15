@@ -16,7 +16,7 @@ public class DisciplinaController {
         System.out.println("chegou aqui a requisição...");
         return "okok";
     }
-    @PostMapping(value = "/api/professor/")
+    @PostMapping(value = "/api/disciplina/")
     public void create(@RequestBody DisciplinaDto DisciplinaDto){
         Professor disciplina = DisciplinaDto.novoDisciplina();
         System.out.println(disciplina.toString());
