@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gerentes.horario.dto.ProfessorDto;
+import com.gerentes.horario.dto.DisciplinaDto;
 import com.gerentes.horario.modelo.Professor;
 
 @RestController
-public class ProfessorController {
+public class DisciplinaController {
     
     @GetMapping
     public String imprimir(){
@@ -17,8 +17,8 @@ public class ProfessorController {
         return "okok";
     }
     @PostMapping(value = "/api/professor/")
-    public void create(@RequestBody ProfessorDto ProfessorDto){
-        Professor professor = ProfessorDto.novoProfessor();
-        System.out.println(professor.toString());
+    public void create(@RequestBody DisciplinaDto DisciplinaDto){
+        Professor disciplina = DisciplinaDto.novoDisciplina();
+        System.out.println(disciplina.toString());
     }
 }

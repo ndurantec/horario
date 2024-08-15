@@ -7,37 +7,37 @@ public class TurmaDto {
     private int capacidade;
     private int horario;
  
-@Deprecated
-public TurmaDto(){
-}
+    @Deprecated
+    public TurmaDto(){
+    }
 
-public int getId() {
-    return id;
-}
+    public int getId() {
+        return id;
+    }
 
-public void setId(int id) {
-    this.id = id;
-}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-public int getCapacidade() {
-    return capacidade;
-}
+    public int getCapacidade() {
+        return capacidade;
+    }
 
-public void setCapacidade(int capacidade) {
-    this.capacidade = capacidade;
-}
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
 
 
-public int getHorario() {
-    return horario;
-}
+    public int getHorario() {
+        return horario;
+    }
 
-public void setHorario(int horario) {
-    this.horario = horario;
-}
+    public void setHorario(int horario) {
+        this.horario = horario;
+    }
 
-public Turma novoTurma() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'novoTurma'");
-}
+    public Turma novoTurma() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'novoTurma'");
+    }
 }

@@ -11,9 +11,6 @@ import com.gerentes.horario.dto.TurmaDto;
 @RestController
 public class TurmaController {
     
-
-
-
     @GetMapping
     public String imprimir(){
         System.out.println("chegou aqui a requisição...");
