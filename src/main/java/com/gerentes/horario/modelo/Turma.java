@@ -1,21 +1,36 @@
 package com.gerentes.horario.modelo;
 
-public class Turma {
-    private int id;
-    private int capacidade;
-    private int horario;
+import java.io.Serializable;
 
-    public Turma(){
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class Turma implements Serializable{
+
+    private static final long serialVersionUID =1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    int capacidade;
+    int horario;
+
+    @Deprecated
+    public Turma() {
     }
+
+    
       
-    public int getId() {
+    public Long getId() {
         return id;
     }
     
     
     public void setId(int id) {
-        this.id = id;
+        this.id = (long) id;
     }
     
     
@@ -40,7 +55,7 @@ public class Turma {
     
     
     public Turma(int id, int capacidade, int horario) {
-        this.id = id;
+        this.id = (long) id;
         this.capacidade = capacidade;
         this.horario = horario;
     }
@@ -50,7 +65,7 @@ public class Turma {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = (int) (prime * result + id);
         result = prime * result + capacidade;
         result = prime * result + horario;
         return result;
@@ -81,5 +96,4 @@ public class Turma {
         return "Turma [id=" + id + ", capacidade=" + capacidade + ", horario=" + horario + "]";
     }
     }
-    
     
