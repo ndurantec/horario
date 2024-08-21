@@ -1,5 +1,6 @@
 package com.gerentes.horario.dto;
 
+import com.gerentes.horario.modelo.Disciplina;
 import com.gerentes.horario.modelo.Professor;
 
 public class DisciplinaDto {
@@ -35,7 +36,7 @@ public class DisciplinaDto {
         this.professor = professor;
     }
 
-    public Professor novoDisciplina() {
+    public Disciplina novoDisciplina() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'novoDisciplina'");
     }

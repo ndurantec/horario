@@ -36,8 +36,8 @@ public class TurmaDto {
         this.horario = horario;
     }
 
-    public Turma novoTurma() {
+    public Turma novaTurma() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'novoTurma'");
+        throw new UnsupportedOperationException("Unimplemented method 'novaTurma'");
     }
 }
