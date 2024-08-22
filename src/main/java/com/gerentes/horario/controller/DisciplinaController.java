@@ -33,29 +33,6 @@ public class DisciplinaController {
             return "Erro ao criar disciplina.";
         }
     }
-    /*
-    @PostMapping
-    public Disciplina createDisciplina(@RequestBody Disciplina disciplina) {
-        Object disciplinaService;
-        return disciplinaService.save(disciplina);
-    }
-     @PutMapping("/{id}")
-    public ResponseEntity<Disciplina> updateDisciplina(@PathVariable Long id, @RequestBody Disciplina disciplina) {
-        if (disciplina.findById(id).isPresent()) {
-            disciplina.setId(id);
-            return ResponseEntity.ok(disciplinaService.save(disciplina));
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDisciplina(@PathVariable Long id) {
-        if (disciplinaService.findById(id).isPresent()) {
-            disciplinaService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }*/
 
     @PostMapping(value = "/criar")
     public String criar(){

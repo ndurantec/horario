@@ -1,6 +1,6 @@
 package com.gerentes.horario.modelo;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
