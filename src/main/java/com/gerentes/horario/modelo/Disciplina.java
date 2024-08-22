@@ -27,8 +27,7 @@ public class Disciplina implements Serializable{
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
     }
-
-
+    
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
