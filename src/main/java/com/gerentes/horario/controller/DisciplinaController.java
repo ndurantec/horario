@@ -1,6 +1,8 @@
 package com.gerentes.horario.controller;
 
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gerentes.horario.modelo.Disciplina;
+import com.gerentes.horario.repository.DisciplinaRepository;
 import com.gerentes.horario.dto.DisciplinaDto;
 
 @RestController
 @RequestMapping(value = "/disciplina")
 public class DisciplinaController {
+
+    @Autowired
+    private DisciplinaRepository disciplinaRepository;
     
     @GetMapping(value ="/imprimir")
     public String imprimir() {
@@ -56,5 +62,11 @@ public class DisciplinaController {
     public String alterar(){
         System.out.println("Chegou aqui a requisição...");
         return "alterado";
+    }
+
+    //primeira versão do codigo
+    @GetMapping(value = "/findAll")
+    public List findAll(){
+        return disciplinaRepository.findAll();
     }
 }
