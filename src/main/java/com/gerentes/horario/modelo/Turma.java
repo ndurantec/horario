@@ -24,6 +24,14 @@ public class Turma implements Serializable{
 
     
       
+    public Turma(Long id, int capacidade, int horario) {
+        this.id = id;
+        this.capacidade = capacidade;
+        this.horario = horario;
+    }
+
+
+
     public Long getId() {
         return id;
     }
@@ -54,11 +62,7 @@ public class Turma implements Serializable{
     }
     
     
-    public Turma(int id, int capacidade, int horario) {
-        this.id = (long) id;
-        this.capacidade = capacidade;
-        this.horario = horario;
-    }
+
     
     
     @Override
