@@ -28,7 +28,6 @@ public class ProfessorDto {
 
 
     public Professor novoProfessor() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'novoProfessor'");
+        return new Professor(null, nome, cpf);
     }
 }
