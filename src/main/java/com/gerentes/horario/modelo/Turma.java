@@ -15,8 +15,8 @@ public class Turma implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    int capacidade;
-    int horario;
+    private int capacidade;
+    private int horario;
 
     @Deprecated
     public Turma() {

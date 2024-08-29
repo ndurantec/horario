@@ -3,7 +3,7 @@ package com.gerentes.horario.dto;
 import com.gerentes.horario.modelo.Turma;
 
 public class TurmaDto {
-    private int id;
+    private long id;
     private int capacidade;
     private int horario;
  
@@ -12,7 +12,7 @@ public class TurmaDto {
     }
 
     public int getId() {
-        return id;
+        return (int) id;
     }
 
     public void setId(int id) {
