@@ -3,11 +3,25 @@ package com.gerentes.horario.dto;
 import com.gerentes.horario.modelo.Professor;
 
 public class ProfessorDto {
+    private Long id;
     private String nome;
     private String cpf;
  
     @Deprecated
     public ProfessorDto(){
+    }
+
+    
+    public Professor novoProfessor() {
+        return new Professor(null, nome, cpf);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -24,10 +38,5 @@ public class ProfessorDto {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-
-    public Professor novoProfessor() {
-        return new Professor(null, nome, cpf);
     }
 }

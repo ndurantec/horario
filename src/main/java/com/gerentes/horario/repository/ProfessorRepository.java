@@ -1,12 +1,10 @@
 package com.gerentes.horario.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.gerentes.horario.modelo.Professor;
 
-public class ProfessorRepository {
+public interface ProfessorRepository extends JpaRepository<Professor, Long>{
 
-    public static void save(Professor professor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
+    
     
 }

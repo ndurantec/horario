@@ -15,8 +15,8 @@ public class Professor implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    String nome;
-    String cpf;
+    private String nome;
+    private String cpf;
 
     @Deprecated
     public Professor() {
