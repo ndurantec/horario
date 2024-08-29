@@ -15,8 +15,8 @@ public class Disciplina implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    String nome;
-    int cargaHoraria;
+    private String nome;
+    private int cargaHoraria;
     
     @Deprecated
     public Disciplina() {
@@ -27,7 +27,7 @@ public class Disciplina implements Serializable{
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
     }
-    
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
