@@ -1,4 +1,10 @@
 package com.gerentes.horario.controller;
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jersey.JerseyProperties.Servlet;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,8 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.modelo.Turma;
+import com.gerentes.horario.repository.TurmaRepository;
 import com.gerentes.horario.dto.TurmaDto;
 
 
@@ -15,6 +23,10 @@ import com.gerentes.horario.dto.TurmaDto;
 @RequestMapping(value = "/turma")
 public class TurmaController {
     
+
+    @Autowired
+    private TurmaRepository turmaRepository;
+
     @GetMapping (value = "/imprimir")
     public String imprimir(){
         System.out.println("chegou aqui a requisição...");
@@ -33,6 +45,7 @@ public class TurmaController {
         }
     }
 
+    
     @PostMapping(value = "/criar")
     public String criar(){
         System.out.println("Chegou aqui a requisição...");
@@ -56,5 +69,19 @@ public class TurmaController {
         System.out.println("Chegou aqui a requisição...");
         return "alterado";
     
+    }   
+
+    @PostMapping (value = "/insert")
+    public ResponseEntity<Turma> insert(TurmaDto turmadto){
+
+       Turma turma = turmadto.novaTurma();
+       turmaRepository.save(turma);
+
+       URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/[id]").buildAndExpand(turma.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(turma);
+        
     }
+
+
 }

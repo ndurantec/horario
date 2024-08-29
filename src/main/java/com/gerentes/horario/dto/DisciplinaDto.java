@@ -37,7 +37,6 @@ public class DisciplinaDto {
     }
 
     public Disciplina novoDisciplina() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'novoDisciplina'");
+     return new Disciplina(null, nome, cargaHoraria);
     }
 }
