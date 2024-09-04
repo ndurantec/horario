@@ -1,5 +1,7 @@
 package com.gerentes.horario.controller;
 import java.net.URI;
+import java.net.http.HttpResponse.ResponseInfo;
+import java.util.Optional;
 
 import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -50,11 +54,27 @@ public class TurmaController {
 
     }
 
+    
+    //Atualizar
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Turma turma){
+       Optional<Turma> turmaBanco = turmaRepository.findById(id);
+
+        Turma turmaModificado = turmaBanco.get();
+
+        turmaModificado.setCapacidade(turma.getCapacidade());
         
+        turmaRepository.save(turmaModificado);
+
+        return ResponseEntity.noContent().build();
+
+    }
+
     //Deletar
-    @DeleteMapping(value = "/{id}]")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
-            
+        Optional<Turma> turmaBanco = turmaRepository.findById(id);
+
         turmaRepository.deleteById(id);
             
         return ResponseEntity.noContent().build();
