@@ -5,7 +5,7 @@ import com.gerentes.horario.modelo.Turma;
 public class TurmaDto {
     private long id;
     private int capacidade;
-    private int horario;
+    private String horario;
  
     @Deprecated
     public TurmaDto(){
@@ -28,11 +28,11 @@ public class TurmaDto {
     }
 
 
-    public int getHorario() {
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(int horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
 
@@ -40,3 +40,5 @@ public class TurmaDto {
         return new Turma(null, capacidade, horario);
     }
 }
+
+ 
