@@ -16,7 +16,7 @@ public class Turma implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int capacidade;
-    private int horario;
+    private String horario;
 
     @Deprecated
     public Turma() {
@@ -24,7 +24,7 @@ public class Turma implements Serializable{
 
     
       
-    public Turma(Long id, int capacidade, int horario) {
+    public Turma(Long id, int capacidade, String horario) {
         this.id = id;
         this.capacidade = capacidade;
         this.horario = horario;
@@ -52,30 +52,28 @@ public class Turma implements Serializable{
     }
     
     
-    public int getHorario() {
+    public String getHorario() {
         return horario;
     }
     
     
-    public void setHorario(int horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
-    
-    
-
     
     
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = (int) (prime * result + id);
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + capacidade;
-        result = prime * result + horario;
+        result = prime * result + ((horario == null) ? 0 : horario.hashCode());
         return result;
     }
-    
-    
+
+
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -85,11 +83,17 @@ public class Turma implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         Turma other = (Turma) obj;
-        if (id != other.id)
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
             return false;
         if (capacidade != other.capacidade)
             return false;
-        if (horario != other.horario)
+        if (horario == null) {
+            if (other.horario != null)
+                return false;
+        } else if (!horario.equals(other.horario))
             return false;
         return true;
     }
