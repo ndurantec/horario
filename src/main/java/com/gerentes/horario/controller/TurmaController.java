@@ -1,11 +1,8 @@
 package com.gerentes.horario.controller;
 import java.net.URI;
-import java.net.http.HttpResponse.ResponseInfo;
 import java.util.Optional;
 
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,51 +29,62 @@ public class TurmaController {
 
 
 
+
     //Criar
     @PostMapping(value = "/insert")
     public ResponseEntity<Turma> insert(TurmaDto turmadto){
         Turma turma = turmadto.novaTurma();
-        turmaRepository.save(turma);
+         turmaRepository.save(turma);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-        .path("/[id]").buildAndExpand(turma.getId()).toUri();
+             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                 .path("/[id]").buildAndExpand(turma.getId()).toUri();
 
-    return ResponseEntity.created(uri).body(turma);
+
+        return ResponseEntity.created(uri).body(turma);
         
     }
+
+
 
     //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<Turma> findById(@PathVariable Long id){
         return turmaRepository.findById(id)
+        
                 .map(registro -> ResponseEntity.ok().body(registro))
                         .orElse(ResponseEntity.notFound().build());
 
     }
 
-    
+
+
+
     //Atualizar
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Turma turma){
        Optional<Turma> turmaBanco = turmaRepository.findById(id);
 
         Turma turmaModificado = turmaBanco.get();
-
-        turmaModificado.setCapacidade(turma.getCapacidade());
-        
-        turmaRepository.save(turmaModificado);
+            turmaModificado.setCapacidade(turma.getCapacidade());
+                turmaRepository.save(turmaModificado);
 
         return ResponseEntity.noContent().build();
 
     }
 
+
+
+
     //Deletar
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable Long id, @RequestBody Turma turma){
         Optional<Turma> turmaBanco = turmaRepository.findById(id);
 
-        turmaRepository.deleteById(id);
-            
+
+        Turma turmaModificado = turmaBanco.get();
+           turmaRepository.deleteById(id);
+            turmaRepository.save(turmaModificado);   
+
         return ResponseEntity.noContent().build();
             
     }
