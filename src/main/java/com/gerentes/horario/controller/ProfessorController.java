@@ -29,10 +29,13 @@ public class ProfessorController {
      
     //criar
     @PostMapping (value = "/insert")
-    public ResponseEntity<Professor> insert(ProfessorDto professorDto) {
+    public ResponseEntity<Professor> insert(@RequestBody ProfessorDto professorDto) {
 
         Professor professor = professorDto.novoProfessor();
         professorRepository.save(professor);
+
+        System.out.println("Chegou no método insert");
+        System.out.println(professorDto.toString());
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/id").buildAndExpand(professor.getId()).toUri();
@@ -43,6 +46,7 @@ public class ProfessorController {
    //consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<Professor> findById(@PathVariable Long id) {
+        System.out.println("chegou no método findById");
         return professorRepository.findById(id)
             .map(registro -> ResponseEntity.ok().body(registro))
             .orElse(ResponseEntity.notFound().build());
