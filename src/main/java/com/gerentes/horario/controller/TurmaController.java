@@ -27,7 +27,7 @@ public class TurmaController {
     @Autowired
     private TurmaRepository turmaRepository;
 
-
+    
 
 
     //Criar
@@ -50,7 +50,7 @@ public class TurmaController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Turma> findById(@PathVariable Long id){
         return turmaRepository.findById(id)
-        
+
                 .map(registro -> ResponseEntity.ok().body(registro))
                         .orElse(ResponseEntity.notFound().build());
 
