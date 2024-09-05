@@ -77,6 +77,7 @@ public class DisciplinaController {
         return disciplinaRepository.findAll();
     }
 
+    //Criar
     @PostMapping(value = "/insert")
     public ResponseEntity<Disciplina> insert(@RequestBody DisciplinaDto disciplinaDto){
 
@@ -84,12 +85,14 @@ public class DisciplinaController {
         disciplinaRepository.save(disciplina);
 
        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                    .path("/{id}").buildAndExpand(disciplina.getId())
-                         .toUri();
+                    .path("/{id}")
+                    .buildAndExpand(disciplina.getId())
+                    .toUri();
 
         return ResponseEntity.created(uri).body(disciplina);
     }
     
+    //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<Disciplina> findById(@PathVariable long id){
         return disciplinaRepository.findById(id)
@@ -97,6 +100,7 @@ public class DisciplinaController {
                     .orElse(ResponseEntity.notFound().build());
     }
 
+    //Atualizar
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable long id, @RequestBody Disciplina disciplina){
 
@@ -111,13 +115,14 @@ public class DisciplinaController {
         return ResponseEntity.noContent().build();
     }
 
-     //Deletar
+    //Deletar
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
+
         Optional<Disciplina> disciplinaBanco = disciplinaRepository.findById(id);
 
         disciplinaRepository.deleteById(id);
-            
-        return ResponseEntity.noContent().build();  
+
+        return ResponseEntity.noContent().build();
     }
 }
