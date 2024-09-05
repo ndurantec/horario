@@ -1,58 +1,83 @@
 package com.gerentes.horario.controller;
+import java.net.URI;
+import java.util.Optional;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.modelo.GradeDeHorario;
+import com.gerentes.horario.repository.GradeDeHorarioRepository;
 import com.gerentes.horario.dto.GradeDeHorarioDto;
+
 
 @RestController
 @RequestMapping(value = "/grade")
 public class GradeDeHorarioController {
     
-    @GetMapping(value = "/imprimir")
-    public String imprimir() {
-        System.out.println("Chegou aqui a requisição...");
-        return "okok";
-    }
+    
+    @Autowired
+    private GradeDeHorarioRepository gradeDeHorarioRepository;
 
-    @PostMapping("/create")
-    public String create(@RequestBody GradeDeHorarioDto gradeDeHorarioDto) {
-        try {
+
+    //Criar
+        @PostMapping(value = "/insert")
+        public ResponseEntity<GradeDeHorario> insert(GradeDeHorarioDto gradeDeHorarioDto){
             GradeDeHorario gradeDeHorario = gradeDeHorarioDto.novoGradeDeHorario();
-            System.out.println(gradeDeHorario.toString());
-            return "Grade de Horário criada com sucesso!";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Erro ao criar grade de horário.";
+            gradeDeHorarioRepository.save(gradeDeHorario);
+
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/[id]").buildAndExpand(gradeDeHorario.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(gradeDeHorario);
+            
         }
-    }
-    @PostMapping(value = "/criar")
-    public String criar(){
-        System.out.println("Chegou aqui a requisição...");
-        return "criado";
-    } 
 
-    @DeleteMapping(value = "/deletar")
-    public String deletar(){
-        System.out.println("Chegou aqui a requisição...");
-        return "deletado";
+    //Consultar
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<GradeDeHorario> findById(@PathVariable Long id){
+        return gradeDeHorarioRepository.findById(id)
+                .map(registro -> ResponseEntity.ok().body(registro))
+                        .orElse(ResponseEntity.notFound().build());
+
     }
 
-    @GetMapping(value = "/consultar")
-    public String consultar(){
-        System.out.println("Chegou aqui a requisição...");
-        return "consultado";
+    
+    //Atualizar
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody GradeDeHorario gradeDeHorario){
+       Optional<GradeDeHorario> gradeDeHorarioBanco = gradeDeHorarioRepository.findById(id);
+
+        GradeDeHorario gradeDeHorarioModificado = gradeDeHorarioBanco.get();
+            gradeDeHorarioModificado.setNome(gradeDeHorario.getNome());
+              gradeDeHorarioRepository.save(gradeDeHorarioModificado);
+
+              
+        return ResponseEntity.noContent().build();
+
     }
 
-    @PutMapping(value = "/alterar")
-    public String alterar(){
-        System.out.println("Chegou aqui a requisição...");
-        return "alterado";
+    //Deletar
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id, @RequestBody GradeDeHorario gradeDeHorario){
+        Optional<GradeDeHorario> gradeDeHorarioBanco = gradeDeHorarioRepository.findById(id);
+
+        GradeDeHorario gradeDeHorarioModificado = gradeDeHorarioBanco.get();
+            gradeDeHorarioRepository.deleteById(id);
+                gradeDeHorarioRepository.save(gradeDeHorarioModificado);
+
+            
+        return ResponseEntity.noContent().build();
+            
     }
+
 }
