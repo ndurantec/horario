@@ -117,12 +117,8 @@ public class DisciplinaController {
 
     //Deletar
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-
-        Optional<Disciplina> disciplinaBanco = disciplinaRepository.findById(id);
-
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
         disciplinaRepository.deleteById(id);
-
         return ResponseEntity.noContent().build();
     }
 }
