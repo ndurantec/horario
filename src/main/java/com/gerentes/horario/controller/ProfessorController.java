@@ -17,7 +17,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.dto.ProfessorDto;
 import com.gerentes.horario.modelo.Professor;
-import com.gerentes.horario.modelo.Turma;
 import com.gerentes.horario.repository.ProfessorRepository;
 
 @RestController
@@ -69,11 +68,13 @@ public class ProfessorController {
 
     //Deletar
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable Long id, @RequestBody Professor professor){
         Optional<Professor> professorBanco = professorRepository.findById(id);
 
-        professorRepository.deleteById(id);
-            
+        Professor professorModificado = professorBanco.get();
+          professorRepository.deleteById(id);
+           professorRepository.save(professorModificado);
+
         return ResponseEntity.noContent().build();
             
     }
