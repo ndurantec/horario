@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +21,14 @@ import com.gerentes.horario.modelo.Professor;
 import com.gerentes.horario.repository.ProfessorRepository;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(value = "/professor")
 public class ProfessorController {
 
     @Autowired
     private ProfessorRepository professorRepository;
      
+    
     //criar
     @PostMapping (value = "/insert")
     public ResponseEntity<Professor> insert(@RequestBody ProfessorDto professorDto) {
@@ -65,7 +68,7 @@ public class ProfessorController {
 
        return ResponseEntity.noContent().build();
     }
-
+    /* 
     //Deletar
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id, @RequestBody Professor professor){
@@ -78,5 +81,13 @@ public class ProfessorController {
         return ResponseEntity.noContent().build();
             
     }
+        */
     
+    //Deletar
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        System.out.println("Chegou no servidor");
+        professorRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
