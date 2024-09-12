@@ -4,41 +4,47 @@ import com.gerentes.horario.modelo.Turma;
 
 public class TurmaDto {
     private long id;
-    private int capacidade;
-    private String horario;
+    private String nome;
+    private String sala;
  
     @Deprecated
     public TurmaDto(){
     }
 
-    public int getId() {
-        return (int) id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getCapacidade() {
-        return capacidade;
-    }
-
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
-    }
+            public long getId() {
+                return id;
+            }
 
 
-    public String getHorario() {
-        return horario;
-    }
+            public void setId(long id) {
+                this.id = id;
+            }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
 
-    public Turma novaTurma(){
-        return new Turma(null, capacidade, horario);
-    }
+            public String getNome() {
+                return nome;
+            }
+
+
+
+            public void setNome(String nome) {
+                this.nome = nome;
+            }
+
+
+
+            public String getSala() {
+                return sala;
+            }
+
+
+            public void setSala(String sala) {
+                this.sala = sala;
+            }
+
+        public Turma novaTurma(){
+            return new Turma(null, nome, sala);
+        }
 }
 
  
