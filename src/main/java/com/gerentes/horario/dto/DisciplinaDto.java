@@ -53,6 +53,6 @@ public class DisciplinaDto {
     }
 
     public Disciplina novoDisciplina() {
-        return new Disciplina(null, nome, cargaHoraria);
+        return new Disciplina(null, nome, cargaHoraria, professor);
        }
 }

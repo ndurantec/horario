@@ -17,15 +17,17 @@ public class Disciplina implements Serializable{
     private Long id;
     private String nome;
     private int cargaHoraria;
+    private Professor professor;
     
     @Deprecated
     public Disciplina() {
     }
 
-    public Disciplina(Long id, String nome, int cargaHoraria) {
+    public Disciplina(Long id, String nome, int cargaHoraria, Professor professor) {
         this.id = id;
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
+        this.professor = professor;
     }
 
     public static long getSerialversionuid() {
@@ -56,6 +58,14 @@ public class Disciplina implements Serializable{
         this.cargaHoraria = cargaHoraria;
     }
 
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -63,6 +73,7 @@ public class Disciplina implements Serializable{
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
         result = prime * result + cargaHoraria;
+        result = prime * result + ((professor == null) ? 0 : professor.hashCode());
         return result;
     }
 
@@ -87,11 +98,17 @@ public class Disciplina implements Serializable{
             return false;
         if (cargaHoraria != other.cargaHoraria)
             return false;
+        if (professor == null) {
+            if (other.professor != null)
+                return false;
+        } else if (!professor.equals(other.professor))
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Disciplina [id=" + id + ", nome=" + nome + ", cargaHoraria=" + cargaHoraria + "]";
+        return "Disciplina [id=" + id + ", nome=" + nome + ", cargaHoraria=" + cargaHoraria + ", professor=" + professor
+                + "]";
     }
 }
