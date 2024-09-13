@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,17 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.modelo.Disciplina;
-import com.gerentes.horario.modelo.Turma;
 import com.gerentes.horario.repository.DisciplinaRepository;
 import com.gerentes.horario.dto.DisciplinaDto;
 
 @RestController
 @RequestMapping(value = "/disciplina")
 public class DisciplinaController {
-
+ 
     @Autowired
     private DisciplinaRepository disciplinaRepository;
-    
+
     @GetMapping(value ="/imprimir")
     public String imprimir() {
         System.out.println("Chegou aqui a requisição...");
@@ -47,33 +45,9 @@ public class DisciplinaController {
         }
     }
 
-    @PostMapping(value = "/criar")
-    public String criar(){
-        System.out.println("Chegou aqui a requisição...");
-        return "criado";
-    } 
-
-    @DeleteMapping(value = "/deletar")
-    public String deletar(){
-        System.out.println("Chegou aqui a requisição...");
-        return "deletado";
-    }
-
-    @GetMapping(value = "/consultar")
-    public String consultar(){
-        System.out.println("Chegou aqui a requisição...");
-        return "consultado";
-    }
-
-    @PutMapping(value = "/alterar")
-    public String alterar(){
-        System.out.println("Chegou aqui a requisição...");
-        return "alterado";
-    }
-
     //primeira versão do codigo
     @GetMapping(value = "/findAll")
-    public List findAll(){
+    public List<Disciplina> findAll(){
         return disciplinaRepository.findAll();
     }
 
@@ -107,9 +81,7 @@ public class DisciplinaController {
        Optional<Disciplina> disciplinaBanco = disciplinaRepository.findById(id);
 
         Disciplina disciplinaModificado = disciplinaBanco.get();
-
         disciplinaModificado.setNome(disciplina.getNome());
-
         disciplinaRepository.save(disciplinaModificado);
 
         return ResponseEntity.noContent().build();

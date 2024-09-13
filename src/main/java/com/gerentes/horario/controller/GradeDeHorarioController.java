@@ -1,7 +1,7 @@
 package com.gerentes.horario.controller;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +22,13 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
 
 @RestController
 @RequestMapping(value = "/grade")
-public class GradeDeHorarioController {
-    
+ public class GradeDeHorarioController {
     
     @Autowired
     private GradeDeHorarioRepository gradeDeHorarioRepository;
 
-
     //Criar
-        @PostMapping(value = "/insert")
+     @PostMapping(value = "/insert")
         public ResponseEntity<GradeDeHorario> insert(GradeDeHorarioDto gradeDeHorarioDto){
             GradeDeHorario gradeDeHorario = gradeDeHorarioDto.novoGradeDeHorario();
             gradeDeHorarioRepository.save(gradeDeHorario);
@@ -39,9 +37,14 @@ public class GradeDeHorarioController {
             .path("/[id]").buildAndExpand(gradeDeHorario.getId()).toUri();
 
         return ResponseEntity.created(uri).body(gradeDeHorario);
-            
         }
 
+    @GetMapping(value = "/findAll")
+    public List<GradeDeHorario> findAll (){
+    
+          return gradeDeHorarioRepository.findAll();
+    }
+    
     //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<GradeDeHorario> findById(@PathVariable Long id){
@@ -51,7 +54,6 @@ public class GradeDeHorarioController {
 
     }
 
-    
     //Atualizar
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody GradeDeHorario gradeDeHorario){
@@ -63,7 +65,6 @@ public class GradeDeHorarioController {
 
               
         return ResponseEntity.noContent().build();
-
     }
 
     //Deletar
@@ -77,7 +78,5 @@ public class GradeDeHorarioController {
 
             
         return ResponseEntity.noContent().build();
-            
     }
-
 }
