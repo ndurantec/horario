@@ -27,24 +27,6 @@ public class DisciplinaController {
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
-    @GetMapping(value ="/imprimir")
-    public String imprimir() {
-        System.out.println("Chegou aqui a requisição...");
-        return "okok";
-    }
-
-    @PostMapping("/create")
-    public String create(@RequestBody DisciplinaDto disciplinaDto) {
-        try {
-            Disciplina disciplina = disciplinaDto.novoDisciplina();
-            System.out.println(disciplina.toString());
-            return "Disciplina criada com sucesso!";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Erro ao criar disciplina.";
-        }
-    }
-
     //primeira versão do codigo
     @GetMapping(value = "/findAll")
     public List<Disciplina> findAll(){
