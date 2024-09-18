@@ -29,12 +29,8 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
     private GradeDeHorarioRepository gradeDeHorarioRepository;
 
     //Criar
-<<<<<<< HEAD
-     @PostMapping(value = "/insert")
-=======
     @CrossOrigin("*")
         @PostMapping(value = "/insert")
->>>>>>> 106721759f12493bc73d4ae04cac92bc35e38d77
         public ResponseEntity<GradeDeHorario> insert(GradeDeHorarioDto gradeDeHorarioDto){
             GradeDeHorario gradeDeHorario = gradeDeHorarioDto.novoGradeDeHorario();
             gradeDeHorarioRepository.save(gradeDeHorario);
@@ -77,12 +73,9 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
    @DeleteMapping(value = "/{id}")
    public ResponseEntity<Void> deletar(@PathVariable Long id){
        gradeDeHorarioRepository.deleteById(id);
+
+       
        return ResponseEntity.noContent().build();
    }
-            
-<<<<<<< HEAD
-        return ResponseEntity.noContent().build();
-    }
-=======
->>>>>>> 106721759f12493bc73d4ae04cac92bc35e38d77
-}
+ }
+

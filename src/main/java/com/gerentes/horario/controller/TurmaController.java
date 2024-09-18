@@ -74,9 +74,6 @@
 
     }
 
-
-
-
    //Deletar
    @DeleteMapping(value = "/{id}")
    public ResponseEntity<Void> deletar(@PathVariable Long id){
