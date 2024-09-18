@@ -45,6 +45,13 @@ public class TurmaDto {
         public Turma novaTurma(){
             return new Turma(null, nome, sala);
         }
+
+        @Override
+        public String toString() {
+            return "TurmaDto [id=" + id + ", nome=" + nome + ", sala=" + sala + "]";
+        }
+
+        
 }
 
  
