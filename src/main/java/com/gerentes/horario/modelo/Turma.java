@@ -16,7 +16,7 @@ public class Turma implements Serializable{
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         private String nome;
-        private String sala;
+        private int sala;
 
         @Deprecated
         public Turma() {
@@ -42,15 +42,15 @@ public class Turma implements Serializable{
                 this.nome = nome;
             }
 
-            public String getSala() {
+            public int getSala() {
                 return sala;
             }
 
-            public void setSala(String sala) {
+            public void setSala(int sala) {
                 this.sala = sala;
             }
 
-            public Turma(Long id, String nome, String sala) {
+            public Turma(Long id, String nome, int sala) {
                 this.id = id;
                 this.nome = nome;
                 this.sala = sala;
@@ -62,7 +62,7 @@ public class Turma implements Serializable{
                 int result = 1;
                 result = prime * result + ((id == null) ? 0 : id.hashCode());
                 result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-                result = prime * result + ((sala == null) ? 0 : sala.hashCode());
+                result = prime * result + sala;
                 return result;
             }
 
@@ -85,17 +85,16 @@ public class Turma implements Serializable{
                         return false;
                 } else if (!nome.equals(other.nome))
                     return false;
-                if (sala == null) {
-                    if (other.sala != null)
-                        return false;
-                } else if (!sala.equals(other.sala))
+                if (sala != other.sala)
                     return false;
                 return true;
             }
 
-        @Override
-        public String toString() {
-            return "Turma [id=" + id + ", nome=" + nome + ", sala=" + sala + "]";
-        }
+            @Override
+            public String toString() {
+                return "Turma [id=" + id + ", nome=" + nome + ", sala=" + sala + "]";
+            }
+
+            
     }
     

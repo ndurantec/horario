@@ -21,6 +21,7 @@
 
 
         @RestController
+        @CrossOrigin("*")
         @RequestMapping(value = "/turma")
         public class TurmaController {
     
@@ -29,55 +30,54 @@
         @Autowired
         private TurmaRepository turmaRepository;
 
+        //Criar
+        @PostMapping(value = "/insert")
+        public ResponseEntity<Turma> insert(TurmaDto turmaDto){
+            Turma turma = turmaDto.novaTurma();
+            turmaRepository.save(turma);
+
+                System.out.println("Chegou no método insert");
+                System.out.println(turmaDto.toString());
 
 
-    //Criar
-    @CrossOrigin("*")
-    @PostMapping(value = "/insert")
-    public ResponseEntity<Turma> insert(TurmaDto turmadto){
-        Turma turma = turmadto.novaTurma();
-         turmaRepository.save(turma);
-
-             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                 .path("/[id]").buildAndExpand(turma.getId()).toUri();
+                URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/[id]").buildAndExpand(turma.getId()).toUri();
 
 
-        return ResponseEntity.created(uri).body(turma);
+            return ResponseEntity.created(uri).body(turma);
+            
+        }
+
         
-    }
 
 
+        //Consultar
+        @GetMapping(value = "/{id}")
+        public ResponseEntity<Turma> findById(@PathVariable Long id){
+            return turmaRepository.findById(id)
 
-    //Consultar
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Turma> findById(@PathVariable Long id){
-        return turmaRepository.findById(id)
+                    .map(registro -> ResponseEntity.ok().body(registro))
+                            .orElse(ResponseEntity.notFound().build());
 
-                .map(registro -> ResponseEntity.ok().body(registro))
-                        .orElse(ResponseEntity.notFound().build());
+        }
 
-    }
+        //Atualizar
+        @PutMapping(value = "/{id}")
+        public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Turma turma){
+        Optional<Turma> turmaBanco = turmaRepository.findById(id);
 
+            Turma turmaModificado = turmaBanco.get();
+                turmaModificado.setNome(turma.getNome());
+                    turmaRepository.save(turmaModificado);
 
+            return ResponseEntity.noContent().build();
 
+        }
 
-    //Atualizar
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Turma turma){
-       Optional<Turma> turmaBanco = turmaRepository.findById(id);
-
-        Turma turmaModificado = turmaBanco.get();
-            turmaModificado.setNome(turma.getNome());
-                turmaRepository.save(turmaModificado);
-
+    //Deletar
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        turmaRepository.deleteById(id);
         return ResponseEntity.noContent().build();
-
     }
-
-   //Deletar
-   @DeleteMapping(value = "/{id}")
-   public ResponseEntity<Void> deletar(@PathVariable Long id){
-       turmaRepository.deleteById(id);
-       return ResponseEntity.noContent().build();
-   }
 }
