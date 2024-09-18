@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +29,12 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
     private GradeDeHorarioRepository gradeDeHorarioRepository;
 
     //Criar
+<<<<<<< HEAD
      @PostMapping(value = "/insert")
+=======
+    @CrossOrigin("*")
+        @PostMapping(value = "/insert")
+>>>>>>> 106721759f12493bc73d4ae04cac92bc35e38d77
         public ResponseEntity<GradeDeHorario> insert(GradeDeHorarioDto gradeDeHorarioDto){
             GradeDeHorario gradeDeHorario = gradeDeHorarioDto.novoGradeDeHorario();
             gradeDeHorarioRepository.save(gradeDeHorario);
@@ -68,15 +74,15 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
     }
 
     //Deletar
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id, @RequestBody GradeDeHorario gradeDeHorario){
-        Optional<GradeDeHorario> gradeDeHorarioBanco = gradeDeHorarioRepository.findById(id);
-
-        GradeDeHorario gradeDeHorarioModificado = gradeDeHorarioBanco.get();
-            gradeDeHorarioRepository.deleteById(id);
-                gradeDeHorarioRepository.save(gradeDeHorarioModificado);
-
+   @DeleteMapping(value = "/{id}")
+   public ResponseEntity<Void> deletar(@PathVariable Long id){
+       gradeDeHorarioRepository.deleteById(id);
+       return ResponseEntity.noContent().build();
+   }
             
+<<<<<<< HEAD
         return ResponseEntity.noContent().build();
     }
+=======
+>>>>>>> 106721759f12493bc73d4ae04cac92bc35e38d77
 }
