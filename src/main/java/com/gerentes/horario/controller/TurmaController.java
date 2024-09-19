@@ -72,16 +72,18 @@ public class TurmaController {
 
         Turma turmaModificado = turmaBanco.get();
             turmaModificado.setNome(turma.getNome());
+            turmaModificado.setSala(turma.getSala());
+
                 turmaRepository.save(turmaModificado);
 
         return ResponseEntity.noContent().build();
 
     }
 
-//Deletar
-@DeleteMapping(value = "/{id}")
-public ResponseEntity<Void> deletar(@PathVariable Long id){
-    turmaRepository.deleteById(id);
-    return ResponseEntity.noContent().build();
-}
+    //Deletar
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        turmaRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

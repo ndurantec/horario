@@ -39,6 +39,9 @@ public class ProfessorController {
         System.out.println("Chegou no método insert");
         System.out.println(professorDto.toString());
 
+        professor.setNome(professorDto.getNome());
+        professor.setCpf(professorDto.getCpf());
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/id").buildAndExpand(professor.getId()).toUri();
         
