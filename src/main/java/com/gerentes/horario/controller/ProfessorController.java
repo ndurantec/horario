@@ -29,7 +29,7 @@ public class ProfessorController {
     private ProfessorRepository professorRepository;
      
     
-    //criar
+    //Criar
     @PostMapping (value = "/insert")
     public ResponseEntity<Professor> insert(@RequestBody ProfessorDto professorDto) {
 
@@ -48,7 +48,7 @@ public class ProfessorController {
         return ResponseEntity.created(uri).body(professor);
     }
 
-   //consultar
+   //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<Professor> findById(@PathVariable Long id) {
         System.out.println("chegou no método findById");
@@ -57,7 +57,7 @@ public class ProfessorController {
             .orElse(ResponseEntity.notFound().build());
     }
            
-    //atualizar
+    //Atualizar
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Professor professor) {
 
@@ -71,20 +71,6 @@ public class ProfessorController {
 
        return ResponseEntity.noContent().build();
     }
-    /* 
-    //Deletar
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id, @RequestBody Professor professor){
-        Optional<Professor> professorBanco = professorRepository.findById(id);
-
-        Professor professorModificado = professorBanco.get();
-          professorRepository.deleteById(id);
-           professorRepository.save(professorModificado);
-
-        return ResponseEntity.noContent().build();
-            
-    }
-        */
     
     //Deletar
     @DeleteMapping(value = "/{id}")

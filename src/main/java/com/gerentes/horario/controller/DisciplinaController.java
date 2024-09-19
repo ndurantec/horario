@@ -43,7 +43,11 @@ public class DisciplinaController {
         disciplinaRepository.save(disciplina);
 
         System.out.println("Chamou o método insert");
-        System.out.println(disciplinaDto);
+        System.out.println(disciplinaDto.toString());
+
+        disciplina.setNome(disciplinaDto.getNome());
+        disciplina.setCargaHoraria(disciplina.getCargaHoraria());
+
 
        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")

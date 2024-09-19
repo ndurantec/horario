@@ -1,11 +1,13 @@
 package com.gerentes.horario.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Disciplina implements Serializable{
@@ -17,17 +19,12 @@ public class Disciplina implements Serializable{
     private Long id;
     private String nome;
     private int cargaHoraria;
-    private Professor professor;
+
+    @OneToMany
+    private List<Professor> professor;
     
     @Deprecated
     public Disciplina() {
-    }
-
-    public Disciplina(Long id, String nome, int cargaHoraria, Professor professor) {
-        this.id = id;
-        this.nome = nome;
-        this.cargaHoraria = cargaHoraria;
-        this.professor = professor;
     }
 
     public static long getSerialversionuid() {
@@ -58,11 +55,17 @@ public class Disciplina implements Serializable{
         this.cargaHoraria = cargaHoraria;
     }
 
-    public Professor getProfessor() {
+    public List<Professor> getProfessor() {
         return professor;
     }
 
-    public void setProfessor(Professor professor) {
+    public void setProfessor(List<Professor> professor) {
+        this.professor = professor;
+    }
+
+    public Disciplina(String nome, int cargaHoraria, List<Professor> professor) {
+        this.nome = nome;
+        this.cargaHoraria = cargaHoraria;
         this.professor = professor;
     }
 
@@ -111,4 +114,6 @@ public class Disciplina implements Serializable{
         return "Disciplina [id=" + id + ", nome=" + nome + ", cargaHoraria=" + cargaHoraria + ", professor=" + professor
                 + "]";
     }
+
+   
 }
