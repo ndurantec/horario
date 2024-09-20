@@ -73,6 +73,7 @@ public class ProfessorController {
        Professor professorModificado = professorBanco.get();
 
        professorModificado.setNome(professor.getNome());
+       professorModificado.setCpf(professor.getCpf());
 
        professorRepository.save(professorModificado);
 
