@@ -1,6 +1,7 @@
 package com.gerentes.horario.controller;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,12 @@ public class ProfessorController {
     private ProfessorRepository professorRepository;
      
     
+    //Vizualizar todos
+    @GetMapping(value = "/findAll")
+    public List<Professor> findAll(){
+        return professorRepository.findAll();
+    }
+
     //Criar
     @PostMapping (value = "/insert")
     public ResponseEntity<Professor> insert(@RequestBody ProfessorDto professorDto) {

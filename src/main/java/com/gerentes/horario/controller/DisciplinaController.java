@@ -29,7 +29,7 @@ public class DisciplinaController {
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
-    //primeira versão do codigo
+    //Vizualizar Todos
     @GetMapping(value = "/findAll")
     public List<Disciplina> findAll(){
         return disciplinaRepository.findAll();

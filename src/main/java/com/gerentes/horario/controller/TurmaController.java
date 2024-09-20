@@ -1,5 +1,6 @@
 package com.gerentes.horario.controller;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,13 @@ public class TurmaController {
 
     @Autowired
     private TurmaRepository turmaRepository;
+
+
+    //Vizualizar todos
+    @GetMapping(value = "/findAll")
+    public List<Turma> findAll(){
+        return turmaRepository.findAll();
+    }
 
     //Criar
     @PostMapping(value = "/insert")
