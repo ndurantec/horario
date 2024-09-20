@@ -8,93 +8,76 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class GradeDeHorario implements Serializable{
+    public class GradeDeHorario implements Serializable{
 
-    private static final long serialVersionUID =1L;
+        private static final Long serialVersionUID =1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    String nome;
-    String cpf;
-
-    @Deprecated
-    public GradeDeHorario() {
-    }
-    
-    public GradeDeHorario(Long id, String nome, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    @Override
-    public String toString() {
-        return "GradeDeHorario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int diaDaSemana;
+        private int posicaoDaAula;
+        private Turma turma;
+        
+        public static Long getSerialversionuid() {
+            return serialVersionUID;
+        }
+        public int getDiaDaSemana() {
+            return diaDaSemana;
+        }
+        public void setDiaDaSemana(int diaDaSemana) {
+            this.diaDaSemana = diaDaSemana;
+        }
+        public int getPosicaoDaAula() {
+            return posicaoDaAula;
+        }
+        public void setPosicaoDaAula(int posicaoDaAula) {
+            this.posicaoDaAula = posicaoDaAula;
+        }
+        public Turma getTurma() {
+            return turma;
+        }
+        public void setTurma(Turma turma) {
+            this.turma = turma;
+        }
+        public GradeDeHorario(int diaDaSemana, int posicaoDaAula, Turma turma) {
+            this.diaDaSemana = diaDaSemana;
+            this.posicaoDaAula = posicaoDaAula;
+            this.turma = turma;
+        }
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + diaDaSemana;
+            result = prime * result + posicaoDaAula;
+            result = prime * result + ((turma == null) ? 0 : turma.hashCode());
+            return result;
+        }
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            GradeDeHorario other = (GradeDeHorario) obj;
+            if (diaDaSemana != other.diaDaSemana)
+                return false;
+            if (posicaoDaAula != other.posicaoDaAula)
+                return false;
+            if (turma == null) {
+                if (other.turma != null)
+                    return false;
+            } else if (!turma.equals(other.turma))
+                return false;
             return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        GradeDeHorario other = (GradeDeHorario) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (nome == null) {
-            if (other.nome != null)
-                return false;
-        } else if (!nome.equals(other.nome))
-            return false;
-        if (cpf == null) {
-            if (other.cpf != null)
-                return false;
-        } else if (!cpf.equals(other.cpf))
-            return false;
-        return true;
-    }
- }
+        }
+        @Override
+        public String toString() {
+            return "GradeDeHorario [diaDaSemana=" + diaDaSemana + ", posicaoDaAula=" + posicaoDaAula + ", turma="
+                    + turma + "]";
+        }
+
+    
+}

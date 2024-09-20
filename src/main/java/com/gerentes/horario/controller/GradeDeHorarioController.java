@@ -36,7 +36,7 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
             gradeDeHorarioRepository.save(gradeDeHorario);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/[id]").buildAndExpand(gradeDeHorario.getId()).toUri();
+            .path("/[id]").buildAndExpand(gradeDeHorario.getPosicaoDaAula()).toUri();
 
         return ResponseEntity.created(uri).body(gradeDeHorario);
         }
@@ -62,7 +62,7 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
        Optional<GradeDeHorario> gradeDeHorarioBanco = gradeDeHorarioRepository.findById(id);
 
         GradeDeHorario gradeDeHorarioModificado = gradeDeHorarioBanco.get();
-            gradeDeHorarioModificado.setNome(gradeDeHorario.getNome());
+            gradeDeHorarioModificado.setDiaDaSemana(gradeDeHorario.getDiaDaSemana());
               gradeDeHorarioRepository.save(gradeDeHorarioModificado);
 
               
