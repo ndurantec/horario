@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -60,11 +61,23 @@ public class ProfessorController {
     public ResponseEntity<Professor> findById(@PathVariable Long id) {
         System.out.println("chegou no método findById");
         return professorRepository.findById(id)
-        
+
             .map(registro -> ResponseEntity.ok().body(registro))
             .orElse(ResponseEntity.notFound().build());
     }
            
+    //Atualizar por nome
+    @PostMapping("/findByNome")
+    public ResponseEntity<Long> buscarProfessorPorNome(@RequestBody ProfessorDto professorDto) {
+        Optional<Professor> professor = professorRepository.findByNome(professorDto.getNome());
+
+        Professor professorObjeto = professor.get();
+        System.out.println(professorObjeto.toString());
+        return professor.map(c -> ResponseEntity.ok(c.getId()))
+                    .orElse(ResponseEntity.notFound().build());
+    }
+
+
     //Atualizar
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Professor professor) {
