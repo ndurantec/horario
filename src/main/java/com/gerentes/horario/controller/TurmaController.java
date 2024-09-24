@@ -66,6 +66,7 @@ public class TurmaController {
     //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<Turma> findById(@PathVariable Long id){
+        System.out.println("chegou no método findById");
         return turmaRepository.findById(id)
 
                 .map(registro -> ResponseEntity.ok().body(registro))
@@ -91,6 +92,8 @@ public class TurmaController {
     //Deletar
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
+
+        System.out.println("Chegou no servidor");
         turmaRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

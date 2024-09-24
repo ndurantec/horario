@@ -60,6 +60,7 @@ public class ProfessorController {
     public ResponseEntity<Professor> findById(@PathVariable Long id) {
         System.out.println("chegou no método findById");
         return professorRepository.findById(id)
+        
             .map(registro -> ResponseEntity.ok().body(registro))
             .orElse(ResponseEntity.notFound().build());
     }
