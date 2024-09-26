@@ -1,5 +1,7 @@
 package com.gerentes.horario.dto;
 
+import java.util.List;
+
 import com.gerentes.horario.modelo.Disciplina;
 import com.gerentes.horario.modelo.Professor;
 
@@ -11,6 +13,13 @@ public class DisciplinaDto {
 
     @Deprecated
     public DisciplinaDto() {
+    }
+
+    public DisciplinaDto(Long id, String nome, int cargaHoraria, List<Professor> professor){
+        this.id = id;
+        this.nome = nome;
+        this.cargaHoraria = cargaHoraria;
+        this.professor = (Professor) professor;
     }
 
     public long getId() {

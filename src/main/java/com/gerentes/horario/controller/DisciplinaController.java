@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -63,6 +64,19 @@ public class DisciplinaController {
         return disciplinaRepository.findById(id)
             .map(registro -> ResponseEntity.ok().body(registro))
                     .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping(value = "/consultarPorNome")
+    public ResponseEntity<DisciplinaDto>consultarPorNome(@RequestParam String nome) {
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("O nome ---> " + nome);
+        Disciplina disciplinaConsultado = disciplinaRepository.findByNome(nome);
+        DisciplinaDto disciplinaDTO = new DisciplinaDto(disciplinaConsultado.getId(), disciplinaConsultado.getNome(), disciplinaConsultado.getCargaHoraria(), disciplinaConsultado.getProfessor());
+
+        return ResponseEntity.ok().body(disciplinaDTO);
     }
 
     //Atualizar

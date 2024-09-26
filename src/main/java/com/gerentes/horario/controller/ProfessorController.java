@@ -56,31 +56,6 @@ public class ProfessorController {
         return ResponseEntity.created(uri).body(professor);
     }
 
-   //Consultar
-   /* 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Professor> findById(@PathVariable Long id) {
-        System.out.println("chegou no método findById");
-        return professorRepository.findById(id)
-
-            .map(registro -> ResponseEntity.ok().body(registro))
-            .orElse(ResponseEntity.notFound().build());
-    }
-            */
-           
-    //Consultar por nome
-    /*
-    @PostMapping("/findByNome")
-    public ResponseEntity<Long> buscarProfessorPorNome(@RequestBody ProfessorDto professorDto) {
-        Optional<Professor> professor = professorRepository.findByNome(professorDto.getNome());
-
-        Professor professorObjeto = professor.get();
-        System.out.println(professorObjeto.toString());
-        return professor.map(c -> ResponseEntity.ok(c.getId()))
-                    .orElse(ResponseEntity.notFound().build());  
-    }
-                    */
-
     
     @GetMapping(value = "/consultarPorNome")
     public ResponseEntity<ProfessorDto>consultarPorNome(@RequestParam String nome) {

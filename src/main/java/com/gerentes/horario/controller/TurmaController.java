@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.gerentes.horario.modelo.Professor;
 import com.gerentes.horario.modelo.Turma;
 import com.gerentes.horario.repository.TurmaRepository;
-import com.gerentes.horario.dto.ProfessorDto;
 import com.gerentes.horario.dto.TurmaDto;
 
 
@@ -63,20 +61,6 @@ public class TurmaController {
         
     }
 
-    
-
-    /*
-    //Consultar
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Turma> findById(@PathVariable Long id){
-        System.out.println("chegou no método findById");
-        return turmaRepository.findById(id)
-
-                .map(registro -> ResponseEntity.ok().body(registro))
-                        .orElse(ResponseEntity.notFound().build());
-
-    }
-    */
 
     //Consultar
     @GetMapping(value = "/consultarPorNome")
