@@ -11,6 +11,12 @@ public class TurmaDto {
     public TurmaDto(){
     }
 
+    public TurmaDto(long id, String nome, int sala) {
+
+        this.id = id;
+        this.nome = nome;
+        this.sala = sala;
+    }
             public long getId() {
                 return id;
             }
@@ -38,7 +44,7 @@ public class TurmaDto {
             }
 
 
-            public void setSala(int sala) {
+            public void setSala( int sala) {
                 this.sala = sala;
             }
 

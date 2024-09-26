@@ -18,6 +18,12 @@ public class ProfessorDto {
         this.cpf = cpf;
     }
 
+    public ProfessorDto(long id, String nome, String cpf) {
+
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+    }
 
 
     public Professor novoProfessor() {

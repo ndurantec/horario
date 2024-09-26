@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gerentes.horario.modelo.Professor;
 import com.gerentes.horario.modelo.Turma;
 import com.gerentes.horario.repository.TurmaRepository;
+import com.gerentes.horario.dto.ProfessorDto;
 import com.gerentes.horario.dto.TurmaDto;
 
 
@@ -62,7 +65,7 @@ public class TurmaController {
 
     
 
-
+    /*
     //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<Turma> findById(@PathVariable Long id){
@@ -73,6 +76,22 @@ public class TurmaController {
                         .orElse(ResponseEntity.notFound().build());
 
     }
+    */
+
+    //Consultar
+    @GetMapping(value = "/consultarPorNome")
+    public ResponseEntity<TurmaDto>consultarPorNome(@RequestParam String nome) {
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("O nome ---> " + nome);
+        Turma turmaConsultado = turmaRepository.findByNome(nome);
+        TurmaDto turmaDTO = new TurmaDto(turmaConsultado.getId(), turmaConsultado.getNome(), turmaConsultado.getSala());
+
+        return ResponseEntity.ok().body(turmaDTO);
+    }
+
 
     //Atualizar
     @PutMapping(value = "/{id}")

@@ -82,15 +82,15 @@ public class ProfessorController {
                     */
 
     
-    @GetMapping(value = "/nome")
-    public ResponseEntity<ProfessorDto> find(@RequestParam(value = "value") String nome) {
+    @GetMapping(value = "/consultarPorNome")
+    public ResponseEntity<ProfessorDto>consultarPorNome(@RequestParam String nome) {
         System.out.println("==============================================");
         System.out.println("==============================================");
         System.out.println("==============================================");
         System.out.println("==============================================");
         System.out.println("O nome ---> " + nome);
         Professor professorConsultado = professorRepository.findByNome(nome);
-        ProfessorDto professorDTO = new ProfessorDto(professorConsultado.getNome(), professorConsultado.getCpf());
+        ProfessorDto professorDTO = new ProfessorDto(professorConsultado.getId(), professorConsultado.getNome(), professorConsultado.getCpf());
 
         return ResponseEntity.ok().body(professorDTO);
     }
