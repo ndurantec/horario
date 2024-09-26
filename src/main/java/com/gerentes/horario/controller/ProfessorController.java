@@ -57,6 +57,7 @@ public class ProfessorController {
     }
 
    //Consultar
+   /* 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Professor> findById(@PathVariable Long id) {
         System.out.println("chegou no método findById");
@@ -65,8 +66,10 @@ public class ProfessorController {
             .map(registro -> ResponseEntity.ok().body(registro))
             .orElse(ResponseEntity.notFound().build());
     }
+            */
            
-    //Atualizar por nome
+    //Consultar por nome
+    /*
     @PostMapping("/findByNome")
     public ResponseEntity<Long> buscarProfessorPorNome(@RequestBody ProfessorDto professorDto) {
         Optional<Professor> professor = professorRepository.findByNome(professorDto.getNome());
@@ -74,8 +77,26 @@ public class ProfessorController {
         Professor professorObjeto = professor.get();
         System.out.println(professorObjeto.toString());
         return professor.map(c -> ResponseEntity.ok(c.getId()))
-                    .orElse(ResponseEntity.notFound().build());
+                    .orElse(ResponseEntity.notFound().build());  
     }
+                    */
+
+    
+    @GetMapping(value = "/nome")
+    public ResponseEntity<ProfessorDto> find(@RequestParam(value = "value") String nome) {
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("==============================================");
+        System.out.println("O nome ---> " + nome);
+        Professor professorConsultado = professorRepository.findByNome(nome);
+        ProfessorDto professorDTO = new ProfessorDto(professorConsultado.getNome(), professorConsultado.getCpf());
+
+        return ResponseEntity.ok().body(professorDTO);
+    }
+        
+
+
 
 
     //Atualizar

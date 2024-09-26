@@ -12,6 +12,14 @@ public class ProfessorDto {
     }
 
     
+    
+    public ProfessorDto(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+    }
+
+
+
     public Professor novoProfessor() {
         return new Professor(null, nome, cpf);
     }
