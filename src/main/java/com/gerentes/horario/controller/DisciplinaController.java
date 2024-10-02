@@ -74,7 +74,7 @@ public class DisciplinaController {
         System.out.println("==============================================");
         System.out.println("O nome ---> " + nome);
         Disciplina disciplinaConsultado = disciplinaRepository.findByNome(nome);
-        DisciplinaDto disciplinaDTO = new DisciplinaDto(disciplinaConsultado.getId(), disciplinaConsultado.getNome(), disciplinaConsultado.getCargaHoraria(), disciplinaConsultado.getProfessor());
+        DisciplinaDto disciplinaDTO = new DisciplinaDto(disciplinaConsultado.getNome(), disciplinaConsultado.getCargaHoraria(), disciplinaConsultado.getProfessor());
 
         return ResponseEntity.ok().body(disciplinaDTO);
     }

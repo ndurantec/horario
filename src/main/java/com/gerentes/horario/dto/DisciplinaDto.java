@@ -1,7 +1,5 @@
 package com.gerentes.horario.dto;
 
-import java.util.List;
-
 import com.gerentes.horario.modelo.Disciplina;
 import com.gerentes.horario.modelo.Professor;
 
@@ -15,17 +13,15 @@ public class DisciplinaDto {
     public DisciplinaDto() {
     }
 
-    public DisciplinaDto(Long id, String nome, int cargaHoraria, List<Professor> professor){
-        this.id = id;
+    public DisciplinaDto(String nome, int cargaHoraria, Professor professor) {
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
-        this.professor = (Professor) professor;
+        this.professor = professor;
     }
 
     public long getId() {
         return id;
     }
-
 
     public void setId(long id) {
         this.id = id;
@@ -62,6 +58,8 @@ public class DisciplinaDto {
     }
 
     public Disciplina novoDisciplina() {
-        return new Disciplina(nome, cargaHoraria, null);
-       }
+        return new Disciplina(nome, cargaHoraria, professor);
+    }
+
+    
 }
