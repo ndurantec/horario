@@ -22,18 +22,31 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(value = "/grade")
  public class GradeDeHorarioController {
     
     @Autowired
     private GradeDeHorarioRepository gradeDeHorarioRepository;
 
+    //Vizualizar Todos
+    @GetMapping(value = "/findAll")
+    public List<GradeDeHorario> findAll(){
+        return gradeDeHorarioRepository.findAll();
+    }
+
     //Criar
-    @CrossOrigin("*")
         @PostMapping(value = "/insert")
-        public ResponseEntity<GradeDeHorario> insert(GradeDeHorarioDto gradeDeHorarioDto){
+        public ResponseEntity<GradeDeHorario> insert(@RequestBody GradeDeHorarioDto gradeDeHorarioDto){
             GradeDeHorario gradeDeHorario = gradeDeHorarioDto.novoGradeDeHorario();
             gradeDeHorarioRepository.save(gradeDeHorario);
+
+            System.out.println("Chamou o método insert");
+            System.out.println(gradeDeHorarioDto.toString());
+
+            gradeDeHorario.setDiaDaSemana(gradeDeHorarioDto.getDiaDaSemana());
+            gradeDeHorario.setPosicaoDaAula(gradeDeHorarioDto.getPosicaoDaAula());
+            gradeDeHorario.setTurma(gradeDeHorarioDto.getTurma());
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/[id]").buildAndExpand(gradeDeHorario.getPosicaoDaAula()).toUri();
@@ -41,11 +54,7 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
         return ResponseEntity.created(uri).body(gradeDeHorario);
         }
 
-    @GetMapping(value = "/findAll")
-    public List<GradeDeHorario> findAll (){
-    
-          return gradeDeHorarioRepository.findAll();
-    }
+  
     
     //Consultar
     @GetMapping(value = "/{id}")

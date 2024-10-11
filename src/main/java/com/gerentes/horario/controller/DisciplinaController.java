@@ -98,4 +98,6 @@ public class DisciplinaController {
         disciplinaRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    
 }
