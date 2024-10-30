@@ -43,17 +43,12 @@ public class DisciplinaController {
     //Criar
     @PostMapping(value = "/insert")
     public ResponseEntity<Disciplina> insert(@RequestBody DisciplinaDto disciplinaDto){
-
-<<<<<<< HEAD
-
-        
-
         Disciplina disciplina = disciplinaDto.novoDisciplina();
         disciplinaRepository.save(disciplina);
-=======
+
     Disciplina disciplina = disciplinaDto.novoDisciplina();
     disciplinaRepository.save(disciplina);
->>>>>>> b9ccce06a92a0f08e327788a5c55df1e0e928c3a
+
 
     System.out.println("Chamou o método insert");
     System.out.println(disciplinaDto.toString());
