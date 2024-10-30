@@ -44,6 +44,13 @@ import jakarta.persistence.Id;
             this.posicaoDaAula = posicaoDaAula;
             this.turma = turma;
         }
+
+        @Override
+        public String toString() {
+            return "GradeDeHorario [diaDaSemana=" + diaDaSemana + ", posicaoDaAula=" + posicaoDaAula + ", turma="
+                    + turma + "]";
+        }
+
         @Override
         public int hashCode() {
             final int prime = 31;
@@ -72,10 +79,14 @@ import jakarta.persistence.Id;
             } else if (!turma.equals(other.turma))
                 return false;
             return true;
+<<<<<<< HEAD
         }
         @Override
         public String toString() {
             return "GradeDeHorario [diaDaSemana=" + diaDaSemana + ", posicaoDaAula=" + posicaoDaAula + ", turma="
                     + turma + "]";
         }
+=======
+        }   
+>>>>>>> b9ccce06a92a0f08e327788a5c55df1e0e928c3a
 }

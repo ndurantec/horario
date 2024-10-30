@@ -22,12 +22,16 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(value = "/grade")
  public class GradeDeHorarioController {
+    
+
     
     @Autowired
     private GradeDeHorarioRepository gradeDeHorarioRepository;
 
+<<<<<<< HEAD
     //Criar
     @CrossOrigin("*")
         @PostMapping(value = "/insert")
@@ -38,27 +42,44 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
             gradeDeHorario.setDiaDaSemana(gradeDeHorarioDto.getDiaDaSemana());
             gradeDeHorario.setPosicaoDaAula(gradeDeHorarioDto.getPosicaoDaAula());
             gradeDeHorario.setTurma(gradeDeHorarioDto.getTurma());
+=======
+>>>>>>> b9ccce06a92a0f08e327788a5c55df1e0e928c3a
 
-            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/[id]").buildAndExpand(gradeDeHorario.getPosicaoDaAula()).toUri();
+    //Vizualizar Todos
+    @GetMapping(value = "/findAll")
+    public List<GradeDeHorario> findAll(){
+        return gradeDeHorarioRepository.findAll();
+    }
+
+
+    //Criar
+    @PostMapping(value = "/insert")
+    public ResponseEntity<GradeDeHorario> insert(@RequestBody GradeDeHorarioDto gradeDeHorarioDto){
+        GradeDeHorario gradeDeHorario = gradeDeHorarioDto.novoGradeDeHorario();
+        gradeDeHorarioRepository.save(gradeDeHorario);
+
+        System.out.println("Chamou o método insert");
+        System.out.println(gradeDeHorarioDto.toString());
+
+        gradeDeHorario.setDiaDaSemana(gradeDeHorarioDto.getDiaDaSemana());
+        gradeDeHorario.setPosicaoDaAula(gradeDeHorarioDto.getPosicaoDaAula());
+        gradeDeHorario.setTurma(gradeDeHorarioDto.getTurma());
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+        .path("/[id]").buildAndExpand(gradeDeHorario.getPosicaoDaAula()).toUri();
 
         return ResponseEntity.created(uri).body(gradeDeHorario);
-        }
-
-    @GetMapping(value = "/findAll")
-    public List<GradeDeHorario> findAll (){
-    
-          return gradeDeHorarioRepository.findAll();
     }
-    
+
+
     //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<GradeDeHorario> findById(@PathVariable Long id){
         return gradeDeHorarioRepository.findById(id)
                 .map(registro -> ResponseEntity.ok().body(registro))
                         .orElse(ResponseEntity.notFound().build());
-
     }
+
 
     //Atualizar
     @PutMapping(value = "/{id}")
@@ -68,18 +89,16 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
         GradeDeHorario gradeDeHorarioModificado = gradeDeHorarioBanco.get();
             gradeDeHorarioModificado.setDiaDaSemana(gradeDeHorario.getDiaDaSemana());
               gradeDeHorarioRepository.save(gradeDeHorarioModificado);
-
-              
+    
         return ResponseEntity.noContent().build();
     }
+
 
     //Deletar
    @DeleteMapping(value = "/{id}")
    public ResponseEntity<Void> deletar(@PathVariable Long id){
-       gradeDeHorarioRepository.deleteById(id);
-
-       
-       return ResponseEntity.noContent().build();
+        gradeDeHorarioRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
    }
  }
 

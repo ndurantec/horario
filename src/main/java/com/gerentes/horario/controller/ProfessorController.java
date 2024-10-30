@@ -27,15 +27,18 @@ import com.gerentes.horario.repository.ProfessorRepository;
 @RequestMapping(value = "/professor")
 public class ProfessorController {
 
+
+    
     @Autowired
     private ProfessorRepository professorRepository;
-     
     
+
     //Vizualizar todos
     @GetMapping(value = "/findAll")
     public List<Professor> findAll(){
         return professorRepository.findAll();
     }
+
 
     //Criar
     @PostMapping (value = "/insert")
@@ -56,7 +59,8 @@ public class ProfessorController {
         return ResponseEntity.created(uri).body(professor);
     }
 
-    
+
+    //Consultar
     @GetMapping(value = "/consultarPorNome")
     public ResponseEntity<ProfessorDto>consultarPorNome(@RequestParam String nome) {
         System.out.println("==============================================");
@@ -69,11 +73,8 @@ public class ProfessorController {
 
         return ResponseEntity.ok().body(professorDTO);
     }
-        
-
-
-
-
+       
+    
     //Atualizar
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Professor professor) {
@@ -90,11 +91,12 @@ public class ProfessorController {
        return ResponseEntity.noContent().build();
     }
     
+
     //Deletar
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
         System.out.println("Chegou no servidor");
-        professorRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+            professorRepository.deleteById(id);
+             return ResponseEntity.noContent().build();
     }
 }

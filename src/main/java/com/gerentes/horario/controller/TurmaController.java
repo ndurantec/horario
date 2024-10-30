@@ -39,6 +39,7 @@ public class TurmaController {
         return turmaRepository.findAll();
     }
 
+
     //Criar
     @PostMapping(value = "/insert")
     public ResponseEntity<Turma> insert(@RequestBody TurmaDto turmaDto){
@@ -58,10 +59,10 @@ public class TurmaController {
 
 
         return ResponseEntity.created(uri).body(turma);
-        
+
     }
 
-
+    
     //Consultar
     @GetMapping(value = "/consultarPorNome")
     public ResponseEntity<TurmaDto>consultarPorNome(@RequestParam String nome) {
@@ -89,15 +90,15 @@ public class TurmaController {
                 turmaRepository.save(turmaModificado);
 
         return ResponseEntity.noContent().build();
-
     }
+
 
     //Deletar
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
 
         System.out.println("Chegou no servidor");
-        turmaRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+            turmaRepository.deleteById(id);
+                return ResponseEntity.noContent().build();
     }
 }

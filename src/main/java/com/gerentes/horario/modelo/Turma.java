@@ -57,6 +57,11 @@ public class Turma implements Serializable{
         }
 
         @Override
+        public String toString() {
+            return "Turma [id=" + id + ", nome=" + nome + ", sala=" + sala + "]";
+        }
+
+        @Override
         public int hashCode() {
             final int prime = 31;
             int result = 1;
@@ -88,13 +93,6 @@ public class Turma implements Serializable{
             if (sala != other.sala)
                 return false;
             return true;
-        }
-
-        @Override
-        public String toString() {
-            return "Turma [id=" + id + ", nome=" + nome + ", sala=" + sala + "]";
-        }
-
-            
+        }      
     }
     
