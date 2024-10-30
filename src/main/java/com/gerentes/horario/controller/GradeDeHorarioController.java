@@ -31,7 +31,7 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
     @Autowired
     private GradeDeHorarioRepository gradeDeHorarioRepository;
 
-<<<<<<< HEAD
+
     //Criar
     @CrossOrigin("*")
         @PostMapping(value = "/insert")
@@ -42,8 +42,7 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
             gradeDeHorario.setDiaDaSemana(gradeDeHorarioDto.getDiaDaSemana());
             gradeDeHorario.setPosicaoDaAula(gradeDeHorarioDto.getPosicaoDaAula());
             gradeDeHorario.setTurma(gradeDeHorarioDto.getTurma());
-=======
->>>>>>> b9ccce06a92a0f08e327788a5c55df1e0e928c3a
+
 
     //Vizualizar Todos
     @GetMapping(value = "/findAll")
