@@ -31,6 +31,10 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
     @Autowired
     private GradeDeHorarioRepository gradeDeHorarioRepository;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5402cff4c1a0a7a773cdf833876680f13d222f1c
     //Criar
     @CrossOrigin("*")
         @PostMapping(value = "/insert")
