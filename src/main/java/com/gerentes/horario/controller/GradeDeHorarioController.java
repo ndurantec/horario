@@ -34,6 +34,10 @@ import com.gerentes.horario.dto.GradeDeHorarioDto;
         public ResponseEntity<GradeDeHorario> insert(GradeDeHorarioDto gradeDeHorarioDto){
             GradeDeHorario gradeDeHorario = gradeDeHorarioDto.novoGradeDeHorario();
             gradeDeHorarioRepository.save(gradeDeHorario);
+            
+            gradeDeHorario.setDiaDaSemana(gradeDeHorarioDto.getDiaDaSemana());
+            gradeDeHorario.setPosicaoDaAula(gradeDeHorarioDto.getPosicaoDaAula());
+            gradeDeHorario.setTurma(gradeDeHorarioDto.getTurma());
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/[id]").buildAndExpand(gradeDeHorario.getPosicaoDaAula()).toUri();

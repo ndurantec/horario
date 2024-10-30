@@ -40,6 +40,9 @@ public class DisciplinaController {
     @PostMapping(value = "/insert")
     public ResponseEntity<Disciplina> insert(@RequestBody DisciplinaDto disciplinaDto){
 
+
+        
+
         Disciplina disciplina = disciplinaDto.novoDisciplina();
         disciplinaRepository.save(disciplina);
 

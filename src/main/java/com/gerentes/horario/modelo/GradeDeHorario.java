@@ -78,6 +78,4 @@ import jakarta.persistence.Id;
             return "GradeDeHorario [diaDaSemana=" + diaDaSemana + ", posicaoDaAula=" + posicaoDaAula + ", turma="
                     + turma + "]";
         }
-
-    
 }
