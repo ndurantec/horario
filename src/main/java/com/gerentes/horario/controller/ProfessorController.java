@@ -42,9 +42,17 @@ public class ProfessorController {
 
     //Criar
     @PostMapping (value = "/insert")
-    public ResponseEntity<Professor> insert(@RequestBody ProfessorDto professorDto) {
+    public ResponseEntity<?> insert(@RequestBody ProfessorDto professorDto) {
 
         Professor professor = professorDto.novoProfessor();
+
+        Professor professorEncontrado = professorRepository.findByCpf(professorDto.getCpf());
+
+        if (professorEncontrado != null) {
+            return ResponseEntity.ok("cpf repetido");
+        }
+        
+        
         professorRepository.save(professor);
 
         System.out.println("Chegou no método insert");

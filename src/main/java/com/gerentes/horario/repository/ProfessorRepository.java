@@ -11,6 +11,8 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long>{
     @Query(value = "select * from professor where nome like ?", nativeQuery = true)
     Professor findByNome(String nome);
 
-
+    
+    @Query(value = "select * from professor where cpf = ?1", nativeQuery = true)
+    Professor findByCpf(String cpf);
     
 }

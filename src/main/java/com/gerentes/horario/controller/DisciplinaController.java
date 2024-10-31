@@ -61,6 +61,7 @@ public class DisciplinaController {
     }
     
 
+    /* 
     //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<Disciplina> findById(@PathVariable long id){
@@ -68,7 +69,16 @@ public class DisciplinaController {
             .map(registro -> ResponseEntity.ok().body(registro))
                     .orElse(ResponseEntity.notFound().build());
     }
+    */
 
+
+    /* 
+    //Restrição
+    @GetMapping(value = "/{id}")
+    public findByProfessor(){
+
+    };
+    */
 
     //Consultar
     @GetMapping(value = "/consultarPorNome")
