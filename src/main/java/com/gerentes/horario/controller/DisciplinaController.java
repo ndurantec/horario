@@ -46,22 +46,18 @@ public class DisciplinaController {
         Disciplina disciplina = disciplinaDto.novoDisciplina();
         disciplinaRepository.save(disciplina);
 
-    Disciplina disciplina = disciplinaDto.novoDisciplina();
-    disciplinaRepository.save(disciplina);
+        System.out.println("Chamou o método insert");
+        System.out.println(disciplinaDto.toString());
 
+        disciplina.setNome(disciplinaDto.getNome());
+        disciplina.setCargaHoraria(disciplina.getCargaHoraria());
 
-    System.out.println("Chamou o método insert");
-    System.out.println(disciplinaDto.toString());
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(disciplina.getId())
+                .toUri();
 
-    disciplina.setNome(disciplinaDto.getNome());
-    disciplina.setCargaHoraria(disciplina.getCargaHoraria());
-
-    URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-        .path("/{id}")
-         .buildAndExpand(disciplina.getId())
-            .toUri();
-
-    return ResponseEntity.created(uri).body(disciplina);
+        return ResponseEntity.created(uri).body(disciplina);
     }
     
 
