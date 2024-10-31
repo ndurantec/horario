@@ -1,11 +1,13 @@
 package com.gerentes.horario.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
     public class GradeDeHorario implements Serializable{
@@ -16,34 +18,54 @@ import jakarta.persistence.Id;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int diaDaSemana;
         private int posicaoDaAula;
-        private Turma turma;
-        
+
+
+        @OneToMany
+        private List<Turma> turma;
+
+
         public static Long getSerialversionuid() {
             return serialVersionUID;
         }
+
+
         public int getDiaDaSemana() {
             return diaDaSemana;
         }
+
+
         public void setDiaDaSemana(int diaDaSemana) {
             this.diaDaSemana = diaDaSemana;
         }
+
+
         public int getPosicaoDaAula() {
             return posicaoDaAula;
         }
+
+
         public void setPosicaoDaAula(int posicaoDaAula) {
             this.posicaoDaAula = posicaoDaAula;
         }
-        public Turma getTurma() {
+
+
+        public List<Turma> getTurma() {
             return turma;
         }
-        public void setTurma(Turma turma) {
+
+
+        public void setTurma(List<Turma> turma) {
             this.turma = turma;
         }
-        public GradeDeHorario(int diaDaSemana, int posicaoDaAula, Turma turma) {
+
+
+        public GradeDeHorario(int diaDaSemana, int posicaoDaAula, List<Turma> turma) {
             this.diaDaSemana = diaDaSemana;
             this.posicaoDaAula = posicaoDaAula;
             this.turma = turma;
         }
+
+
         @Override
         public int hashCode() {
             final int prime = 31;
@@ -53,6 +75,8 @@ import jakarta.persistence.Id;
             result = prime * result + ((turma == null) ? 0 : turma.hashCode());
             return result;
         }
+
+
         @Override
         public boolean equals(Object obj) {
             if (this == obj)
@@ -73,11 +97,16 @@ import jakarta.persistence.Id;
                 return false;
             return true;
         }
+
+
         @Override
         public String toString() {
             return "GradeDeHorario [diaDaSemana=" + diaDaSemana + ", posicaoDaAula=" + posicaoDaAula + ", turma="
                     + turma + "]";
         }
+        
+        
+        
 
     
 }
