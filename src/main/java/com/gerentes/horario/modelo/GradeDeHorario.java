@@ -65,6 +65,11 @@ import jakarta.persistence.OneToMany;
             this.turma = turma;
         }
 
+        @Override
+        public String toString() {
+            return "GradeDeHorario [diaDaSemana=" + diaDaSemana + ", posicaoDaAula=" + posicaoDaAula + ", turma="
+                    + turma + "]";
+        }
 
         @Override
         public int hashCode() {
@@ -96,17 +101,5 @@ import jakarta.persistence.OneToMany;
             } else if (!turma.equals(other.turma))
                 return false;
             return true;
-        }
-
-
-        @Override
-        public String toString() {
-            return "GradeDeHorario [diaDaSemana=" + diaDaSemana + ", posicaoDaAula=" + posicaoDaAula + ", turma="
-                    + turma + "]";
-        }
-        
-        
-        
-
-    
+    }
 }

@@ -6,6 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import com.gerentes.horario.modelo.Disciplina;
 
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Long>{
-     @Query(value = "select * from disciplina where nome like ?", nativeQuery = true)
+
+    @Query(value = "select * from disciplina where nome like ?", nativeQuery = true)
     Disciplina findByNome(String nome);
+
+
+    @Query(value = "select * from disciplina d inner join professor p on d.id_professor = p.id;", nativeQuery = true)
+    Disciplina findByProfessor(Long id);
+
 }
