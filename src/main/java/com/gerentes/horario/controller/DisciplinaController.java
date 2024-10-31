@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.modelo.Disciplina;
+import com.gerentes.horario.modelo.Professor;
 import com.gerentes.horario.repository.DisciplinaRepository;
 import com.gerentes.horario.dto.DisciplinaDto;
 
@@ -91,6 +92,10 @@ public class DisciplinaController {
 
        Optional<Disciplina> disciplinaBanco = disciplinaRepository.findById(id);
 
+       if (!disciplinaBanco.isPresent()){
+        return ResponseEntity.notFound().build();
+       }
+
         Disciplina disciplinaModificado = disciplinaBanco.get();
         disciplinaModificado.setNome(disciplina.getNome());
         disciplinaRepository.save(disciplinaModificado);
@@ -98,6 +103,24 @@ public class DisciplinaController {
         return ResponseEntity.noContent().build();
     }
 
+
+    public class Validador{
+        private Professor professor;
+
+        public boolean atribuirDisciplina(Disciplina disciplina, int cargaHoraria) {
+
+            if (cargaHoraria > 6 ) {
+                System.out.println("Erro:A carga horária da disciplina não pode ser maior que 6.");
+                return false;
+            }
+
+            disciplina.setCargaHoraria(cargaHoraria);
+            System.out.println("Disciplina atríbuida com sucesso com carga horária" + cargaHoraria + "horas!");
+            return true;
+            }
+        }
+
+    
 
     //Deletar
     @DeleteMapping(value = "/{id}")
