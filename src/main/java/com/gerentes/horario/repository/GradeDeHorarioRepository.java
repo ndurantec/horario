@@ -9,9 +9,4 @@ public interface GradeDeHorarioRepository extends JpaRepository<GradeDeHorario, 
 
     @Query(value = "select * from grade_de_horario wehre nome like = ?", nativeQuery = true)
     GradeDeHorario findByNome(String nome);
-
-
-    @Query(value = "select * from disciplina where id_professor = ?", nativeQuery = true)
-
-    GradeDeHorario findByNome(int id);
 }
