@@ -10,4 +10,7 @@ public interface TurmaRepository extends JpaRepository<Turma, Long>{
     @Query(value = "select * from turma where nome like ?", nativeQuery = true)
     Turma findByNome(String nome);
 
+    @Query(value = "select * from turma where sala = ?1", nativeQuery = true)
+    Turma findBySala(int sala);
+
 }
