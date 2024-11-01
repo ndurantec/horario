@@ -49,6 +49,7 @@ public class ProfessorController {
         Professor professorEncontrado = professorRepository.findByCpf(professorDto.getCpf());
 
         if (professorEncontrado != null) {
+            
             return ResponseEntity.ok("cpf repetido");
         }
         
