@@ -34,6 +34,7 @@ public class DisciplinaController {
     private DisciplinaRepository disciplinaRepository;
 
     
+    
     //Vizualizar Todos
     @GetMapping(value = "/findAll")
     public List<Disciplina> findAll(){
@@ -43,8 +44,20 @@ public class DisciplinaController {
 
     //Criar
     @PostMapping(value = "/insert")
-    public ResponseEntity<Disciplina> insert(@RequestBody DisciplinaDto disciplinaDto){
+    public ResponseEntity<?> insert(@RequestBody DisciplinaDto disciplinaDto){
         Disciplina disciplina = disciplinaDto.novoDisciplina();
+        
+        // String resultado = validadorCargaHoraria(disciplina);
+
+        if (  !validadorCargaHoraria(disciplina).equals("true")   ) {
+            return ResponseEntity.ok().body("A carga horária da disciplina não pode ser maior que 6");
+        }
+
+        
+        // if (!resultado.equals("true")) {
+        //     return ResponseEntity.ok().body("A carga horária da disciplina não pode ser maior que 6");
+        // }
+
         disciplinaRepository.save(disciplina);
 
         System.out.println("Chamou o método insert");
@@ -59,6 +72,9 @@ public class DisciplinaController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(disciplina);
+        
+        
+        
     }
     
 
@@ -104,21 +120,14 @@ public class DisciplinaController {
     }
 
 
-    public class Validador{
-        private Professor professor;
+    private String validadorCargaHoraria(Disciplina disciplina) {
 
-        public boolean atribuirDisciplina(Disciplina disciplina, int cargaHoraria) {
-
-            if (cargaHoraria > 6 ) {
-                System.out.println("Erro:A carga horária da disciplina não pode ser maior que 6.");
-                return false;
+            if (disciplina.getCargaHoraria() <= 6 ) {                
+                return "true";
             }
-
-            disciplina.setCargaHoraria(cargaHoraria);
-            System.out.println("Disciplina atríbuida com sucesso com carga horária" + cargaHoraria + "horas!");
-            return true;
-            }
-        }
+            
+            return "A carga horária da disciplina não pode ser maior que 6";          
+    }  
 
     
 
