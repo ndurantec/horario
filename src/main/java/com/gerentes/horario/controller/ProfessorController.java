@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.dto.ProfessorDto;
+import com.gerentes.horario.modelo.Disciplina;
 import com.gerentes.horario.modelo.Professor;
+import com.gerentes.horario.repository.DisciplinaRepository;
 import com.gerentes.horario.repository.ProfessorRepository;
 
 @RestController
@@ -31,6 +33,9 @@ public class ProfessorController {
     
     @Autowired
     private ProfessorRepository professorRepository;
+
+    @Autowired
+    private DisciplinaRepository disciplinaRepository;
     
 
     //Vizualizar todos
@@ -98,5 +103,13 @@ public class ProfessorController {
         System.out.println("Chegou no servidor");
             professorRepository.deleteById(id);
              return ResponseEntity.noContent().build();
+    }
+
+    //Consultar id do professor na tela
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Disciplina> findById(@PathVariable long id){        
+        return disciplinaRepository.findById(id)
+            .map(registro -> ResponseEntity.ok().body(registro))
+                    .orElse(ResponseEntity.notFound().build());
     }
 }
