@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gerentes.horario.modelo.Professor;
 import com.gerentes.horario.modelo.Turma;
 import com.gerentes.horario.repository.TurmaRepository;
 import com.gerentes.horario.dto.TurmaDto;
@@ -40,11 +41,20 @@ public class TurmaController {
     }
 
 
+    /*teste*/
     //Criar
     @PostMapping(value = "/insert")
-    public ResponseEntity<Turma> insert(@RequestBody TurmaDto turmaDto){
+    public ResponseEntity<?> insert(@RequestBody TurmaDto turmaDto){
         Turma turma = turmaDto.novaTurma();
+
+       Turma turmaEncontrado = turmaRepository.findBySala(turmaDto.getSala());
+
+        if (turmaEncontrado != null) {
+            
+            return ResponseEntity.ok("sala repetida");
+        }
         
+        turmaRepository.save(turma);
 
         System.out.println("Chegou no método insert");
         System.out.println(turmaDto.toString());
@@ -52,7 +62,6 @@ public class TurmaController {
         turma.setNome(turmaDto.getNome());
         turma.setSala(turmaDto.getSala());
 
-        turmaRepository.save(turma);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/[id]").buildAndExpand(turma.getId()).toUri();

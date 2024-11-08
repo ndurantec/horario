@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.modelo.Disciplina;
+import com.gerentes.horario.modelo.Professor;
 import com.gerentes.horario.repository.DisciplinaRepository;
 import com.gerentes.horario.dto.DisciplinaDto;
 
@@ -33,6 +34,7 @@ public class DisciplinaController {
     private DisciplinaRepository disciplinaRepository;
 
     
+    
     //Vizualizar Todos
     @GetMapping(value = "/findAll")
     public List<Disciplina> findAll(){
@@ -42,8 +44,20 @@ public class DisciplinaController {
 
     //Criar
     @PostMapping(value = "/insert")
-    public ResponseEntity<Disciplina> insert(@RequestBody DisciplinaDto disciplinaDto){
+    public ResponseEntity<?> insert(@RequestBody DisciplinaDto disciplinaDto){
         Disciplina disciplina = disciplinaDto.novoDisciplina();
+        
+        // String resultado = validadorCargaHoraria(disciplina);
+
+        if (  !validadorCargaHoraria(disciplina).equals("true")   ) {
+            return ResponseEntity.ok().body("A carga horária da disciplina não pode ser maior que 6");
+        }
+
+        
+        // if (!resultado.equals("true")) {
+        //     return ResponseEntity.ok().body("A carga horária da disciplina não pode ser maior que 6");
+        // }
+
         disciplinaRepository.save(disciplina);
 
         System.out.println("Chamou o método insert");
@@ -58,9 +72,13 @@ public class DisciplinaController {
                 .toUri();
 
         return ResponseEntity.created(uri).body(disciplina);
+        
+        
+        
     }
     
 
+    /* 
     //Consultar
     @GetMapping(value = "/{id}")
     public ResponseEntity<Disciplina> findById(@PathVariable long id){
@@ -68,7 +86,16 @@ public class DisciplinaController {
             .map(registro -> ResponseEntity.ok().body(registro))
                     .orElse(ResponseEntity.notFound().build());
     }
+    */
 
+
+    /* 
+    //Restrição
+    @GetMapping(value = "/{id}")
+    public findByProfessor(){
+
+    };
+    */
 
     //Consultar
     @GetMapping(value = "/consultarPorNome")
@@ -91,6 +118,10 @@ public class DisciplinaController {
 
        Optional<Disciplina> disciplinaBanco = disciplinaRepository.findById(id);
 
+       if (!disciplinaBanco.isPresent()){
+        return ResponseEntity.notFound().build();
+       }
+
         Disciplina disciplinaModificado = disciplinaBanco.get();
         disciplinaModificado.setNome(disciplina.getNome());
         disciplinaRepository.save(disciplinaModificado);
@@ -98,6 +129,17 @@ public class DisciplinaController {
         return ResponseEntity.noContent().build();
     }
 
+
+    private String validadorCargaHoraria(Disciplina disciplina) {
+
+            if (disciplina.getCargaHoraria() <= 6 ) {                
+                return "true";
+            }
+            
+            return "A carga horária da disciplina não pode ser maior que 6";          
+    }  
+
+    
 
     //Deletar
     @DeleteMapping(value = "/{id}")
