@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.modelo.Disciplina;
-import com.gerentes.horario.modelo.Professor;
+import com.gerentes.horario.modelo.Turma;
 import com.gerentes.horario.repository.DisciplinaRepository;
 import com.gerentes.horario.dto.DisciplinaDto;
 
@@ -28,23 +28,34 @@ import com.gerentes.horario.dto.DisciplinaDto;
 @RequestMapping(value = "/disciplina")
 public class DisciplinaController {
  
-
-
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
-    
-    
     //Vizualizar Todos
     @GetMapping(value = "/findAll")
     public List<Disciplina> findAll(){
         return disciplinaRepository.findAll();
     }
 
-
     //Criar
     @PostMapping(value = "/insert")
     public ResponseEntity<?> insert(@RequestBody DisciplinaDto disciplinaDto){
+       
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println(disciplinaDto.toString());
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println("====================================");
+       
+        Long quantidade = disciplinaRepository.duplicadoDisciplinaPorProfessor(disciplinaDto.getNome(), disciplinaDto.getProfessor().getId());
+
+        if (quantidade >= 1) {
+            
+            return ResponseEntity.ok("Professor repetido, na mesma disciplina");
+        } 
+       
         Disciplina disciplina = disciplinaDto.novoDisciplina();
         
         // String resultado = validadorCargaHoraria(disciplina);
@@ -68,16 +79,12 @@ public class DisciplinaController {
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")
-            .buildAndExpand(disciplina.getId())
-                .toUri();
+                .buildAndExpand(disciplina.getId())
+                    .toUri();
 
         return ResponseEntity.created(uri).body(disciplina);
-        
-        
-        
     }
     
-
     /* 
     //Consultar
     @GetMapping(value = "/{id}")
@@ -141,10 +148,12 @@ public class DisciplinaController {
 
     
 
-    //Deletar
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id){
-        disciplinaRepository.deleteById(id);
-         return ResponseEntity.noContent().build();
-    }  
-}
+     //Deletar
+     @DeleteMapping(value = "/{id}")
+     public ResponseEntity<Void> deletar(@PathVariable Long id){
+ 
+         System.out.println("Chegou no servidor");
+            disciplinaRepository.deleteById(id);
+                 return ResponseEntity.noContent().build();
+    }
+ }

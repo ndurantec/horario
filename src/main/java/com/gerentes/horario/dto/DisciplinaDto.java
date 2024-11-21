@@ -61,5 +61,13 @@ public class DisciplinaDto {
         return new Disciplina(nome, cargaHoraria, professor);
     }
 
+    @Override
+    public String toString() {
+        return "DisciplinaDto [id=" + id + ", nome=" + nome + ", cargaHoraria=" + cargaHoraria + ", professor="
+                + professor + "]";
+    }
+
+
+    
     
 }

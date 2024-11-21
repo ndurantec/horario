@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.gerentes.horario.modelo.Professor;
 import com.gerentes.horario.modelo.Turma;
 import com.gerentes.horario.repository.TurmaRepository;
 import com.gerentes.horario.dto.TurmaDto;
