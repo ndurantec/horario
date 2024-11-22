@@ -2,6 +2,8 @@ package com.gerentes.horario.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gerentes.horario.modelo.Turma;
 import com.gerentes.horario.repository.TurmaRepository;
+
+
+
 import com.gerentes.horario.dto.TurmaDto;
 
 
@@ -40,7 +45,6 @@ public class TurmaController {
     }
 
 
-    /*teste*/
     //Criar
     @PostMapping(value = "/insert")
     public ResponseEntity<?> insert(@RequestBody TurmaDto turmaDto){
@@ -52,6 +56,15 @@ public class TurmaController {
             
             return ResponseEntity.ok("sala repetida");
         }
+
+        String regex = "^[a-zA-Z0-9\\s]*$";  
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(turma.getNome());
+
+        if (!matcher.matches()) {
+            return ResponseEntity.ok("Nome com carácteres especiais");
+        }
+
         
         turmaRepository.save(turma);
 
@@ -71,6 +84,7 @@ public class TurmaController {
     }
 
     
+    /* 
     //Consultar
     @GetMapping(value = "/consultarPorNome")
     public ResponseEntity<TurmaDto>consultarPorNome(@RequestParam String nome) {
@@ -83,6 +97,16 @@ public class TurmaController {
         TurmaDto turmaDTO = new TurmaDto(turmaConsultado.getId(), turmaConsultado.getNome(), turmaConsultado.getSala());
 
         return ResponseEntity.ok().body(turmaDTO);
+    }
+        */
+
+        @PostMapping("/findByNome")
+    public ResponseEntity<Long> buscarTurmaPorNome(@RequestBody TurmaDto turmaDto) {
+        Optional<Turma> turma = turmaRepository.findByNome(turmaDto.getNome());
+        Turma turmaObjeto = turma.get();
+        System.out.println(turmaObjeto.toString());
+        return turma.map(c -> ResponseEntity.ok(c.getId()))
+                    .orElse(ResponseEntity.notFound().build());
     }
 
 
