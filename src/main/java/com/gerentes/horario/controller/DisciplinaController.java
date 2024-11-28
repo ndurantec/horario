@@ -60,7 +60,7 @@ public class DisciplinaController {
         
         // String resultado = validadorCargaHoraria(disciplina);
 
-        if (  !validadorCargaHoraria(disciplina).equals("true")   ) {
+        if (  !validadorCargaHoraria(disciplinaDto).equals("true")   ) {
             return ResponseEntity.ok().body("A carga horária da disciplina não pode ser maior que 6");
         }
 
@@ -105,7 +105,7 @@ public class DisciplinaController {
     */
 
     //Consultar
-    @GetMapping(value = "/consultarPorNome")
+    @GetMapping(value = "/consultarDisciplinaPorNome")
     public ResponseEntity<DisciplinaDto>consultarPorNome(@RequestParam String nome) {
         System.out.println("==============================================");
         System.out.println("==============================================");
@@ -121,25 +121,39 @@ public class DisciplinaController {
 
     //Atualizar
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable long id, @RequestBody Disciplina disciplina){
+    public ResponseEntity<?> update(@PathVariable long id, @RequestBody DisciplinaDto disciplinaDto){
 
+
+        if ( !validadorCargaHoraria(disciplinaDto).equals("true") ) {
+            return ResponseEntity.ok( "A carga horária da disciplina não pode ser maior que 6");
+
+        }
+
+
+        
        Optional<Disciplina> disciplinaBanco = disciplinaRepository.findById(id);
 
        if (!disciplinaBanco.isPresent()){
-        return ResponseEntity.notFound().build();
+         return ResponseEntity.notFound().build();
        }
 
         Disciplina disciplinaModificado = disciplinaBanco.get();
-        disciplinaModificado.setNome(disciplina.getNome());
+        
+        disciplinaModificado.setNome(disciplinaDto.getNome());
+        disciplinaModificado.setCargaHoraria(disciplinaDto.getCargaHoraria());
+        disciplinaModificado.setProfessor(disciplinaDto.getProfessor());
+
+
         disciplinaRepository.save(disciplinaModificado);
+
 
         return ResponseEntity.noContent().build();
     }
 
 
-    private String validadorCargaHoraria(Disciplina disciplina) {
+    private String validadorCargaHoraria(DisciplinaDto disciplinaDto) {
 
-            if (disciplina.getCargaHoraria() <= 6 ) {                
+            if (disciplinaDto.getCargaHoraria() <= 6 ) {                
                 return "true";
             }
             
