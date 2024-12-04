@@ -4,7 +4,7 @@ import com.gerentes.horario.modelo.Professor;
 
 public class ProfessorDto {
     private Long id;
-    private String nome;
+    private String nome;    
     private String cpf;
  
     @Deprecated

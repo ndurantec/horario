@@ -2,10 +2,14 @@ package com.gerentes.horario.modelo;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.br.*;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Professor implements Serializable{
@@ -16,6 +20,8 @@ public class Professor implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @NotBlank(message = "o CPF não pode ser nulo")
+    @CPF
     private String cpf;
 
     @Deprecated
